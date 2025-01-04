@@ -107,6 +107,9 @@ export const login = async (req,res)=>{
         const tokenData = {
           _id: userExist._id,
           email: userExist.email,
+          gender: userExist.gender,
+          profilePic:userExist.profilePic
+
         };
     
         // Generate token
