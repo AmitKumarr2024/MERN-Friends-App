@@ -2,17 +2,14 @@
   "name": "project",
   "version": "1.0.0",
   "description": "Friends Request details",
-  "keywords": [
-    "Friends",
-    "Request"
-  ],
+  "keywords": [],
   "license": "ISC",
   "author": "Amit kumar",
-  "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "server": "nodemon Backend/index.js",
-    "start": "node Backend/index.js",
+    "start": "nodemon Backend/index.js",
     "build": "npm install && npm install --prefix Client && npm run build --prefix Client"
   },
   "dependencies": {
