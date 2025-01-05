@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8005', // Your backend URL
+        target: 'https://mern-friends-app.onrender.com', // Your backend URL
         changeOrigin: true,
         secure: false,
       },
