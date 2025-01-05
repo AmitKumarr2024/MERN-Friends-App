@@ -13,10 +13,10 @@ const Login = () => {
   // Check if user is already logged in when the component mounts
   useEffect(() => {
     const token = localStorage.getItem("token");  // Get token from localStorage
-    console.log("token:", token);
+    
 
     if (token) {
-      navigate("/");  // Navigate to home page if token exists
+      navigate("/home");  // Navigate to home page if token exists
     }
   }, [navigate]);
 
@@ -40,10 +40,10 @@ const Login = () => {
         toast.success(result.message || "Login Successful");
 
         // Store the token in localStorage
-        localStorage.setItem("token", result.token);  // Assuming result.token contains the JWT
-        console.log("Token stored:", result.token);
+        localStorage.setItem("token", result.data);  // Assuming result.token contains the JWT
+        
 
-        navigate('/');  // Navigate to home page after login
+        navigate('/home');  // Navigate to home page after login
       } else {
         toast.error(result.message || "Login failed");
       }

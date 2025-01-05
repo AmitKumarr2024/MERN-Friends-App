@@ -7,8 +7,8 @@ const routes=new express.Router();
 
 routes.post('/createUser',userRegister);
 routes.post('/loginUser',login);
-routes.get('/singleUser/:id',jwtAuth,singleUser);
-routes.get('/allUser',jwtAuth,allUser);
+routes.get('/singleUser/:id',singleUser);
+routes.get('/allUser',allUser);
 routes.post('/logout',jwtAuth,Logout);
 
 export default routes;

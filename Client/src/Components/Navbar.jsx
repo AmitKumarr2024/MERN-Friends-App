@@ -50,7 +50,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-brown-600 px-4 py-2 flex items-center justify-between">
       {/* Logo */}
-      <div className="text-2xl font-extrabold text-white cursor-pointer">FriendsPoint</div>
+      <Link to={'/home'} className="text-2xl font-extrabold text-white cursor-pointer">FriendsPoint</Link>
 
       {/* Search Bar (Hidden on small screens) */}
       <div className="hidden sm:flex min-w-96 py-2">

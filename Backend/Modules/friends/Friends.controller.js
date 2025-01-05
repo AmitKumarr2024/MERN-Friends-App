@@ -9,6 +9,7 @@ export const viewFriends = async (req, res) => {
       return res.status(400).json({ message: "UserId is required." });
     }
 
+    // Find the accepted friend requests
     const friendRequests = await FriendModel.find({
       $or: [
         { user1: userId, status: "accepted" },
@@ -16,22 +17,30 @@ export const viewFriends = async (req, res) => {
       ],
     });
 
+    // If no friends found, return 404
     if (friendRequests.length === 0) {
       return res.status(404).json({ message: "No friends found." });
     }
 
-    const friends = friendRequests.map((request) => {
-      return request.user1.toString() === userId
-        ? request.user2
-        : request.user1;
-    });
+    // Map to get the other user's ID in the friend request
+    const friendIds = friendRequests.map((request) =>
+      request.user1.toString() === userId ? request.user2 : request.user1
+    );
 
-    return res.status(200).json({ friends });
+    // Fetch complete user data for all friendIds
+    const friends = await UserModel.find({ _id: { $in: friendIds } }).select(
+      "_id fullName email profilePic gender"
+    );
+
+    return res.status(200).json({ data: friends });
   } catch (error) {
-    console.error("Error in viewing friends:", error);
+    console.error("Error fetching friends:", error);
     return res.status(500).json({ message: "Server error." });
   }
 };
+
+
+
 
 
 export const sendRequest = async (req, res) => {
@@ -71,7 +80,7 @@ export const sendRequest = async (req, res) => {
     await newRequest.save();
 
     // Respond with the success message and the newly created request
-    return res.status(200).json({ Message:"Send Request completed",data: newRequest });
+    return res.status(200).json({ Message:"Send Request completed", newRequest });
   } catch (error) {
     console.error("Error in sending friend request:", error);
     return res.status(500).json({ message: "Server error." });
@@ -135,7 +144,7 @@ export const cancelRequest = async (req, res) => {
   };
   
 
-export const unfriend = async (req, res) => {
+  export const unfriend = async (req, res) => {
     try {
       const { userId, friendId } = req.body; // Extract userId and friendId from request body
   
@@ -150,8 +159,8 @@ export const unfriend = async (req, res) => {
       // Find and remove the "accepted" friendship between the two users
       const friendRequest = await FriendModel.findOneAndDelete({
         $or: [
-          { user1: userId, user2: friendId, status: "accepted" },
-          { user1: friendId, user2: userId, status: "accepted" },
+          { user1: userId, user2: friendId, status: "accepted" },  // Case 1: user1 is the current user
+          { user1: friendId, user2: userId, status: "accepted" },  // Case 2: user2 is the current user
         ],
       });
   

@@ -4,6 +4,8 @@ import Home from "../Pages/Home";
 import Signup from "../Pages/SignupPage";
 import Login from "../Pages/LoginPage";
 import ProtectedRoute from "../helper/ProtectorRouter"; 
+import NewRequestRecieve from "../Components/NewRequestRecieve";
+import ViewFriends from "../Components/ViewFriends";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,23 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        ),
+      },
+      
+      {
+        path: "/newRequest",
+        element: (
+          <ProtectedRoute>
+            <NewRequestRecieve/>
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/viewFriends",
+        element: (
+          <ProtectedRoute>
+            <ViewFriends/>
           </ProtectedRoute>
         ),
       },
