@@ -8,12 +8,11 @@ const SideMenu = () => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
-    console.log("Stored Token:", storedToken); // Log token value
     
     if (storedToken) {
       try {
         const decoded = jwtDecode(storedToken);
-        console.log("Decoded Token:", decoded); // Log decoded token
+        
         
         setExtractedUserId(decoded?._id); // Set extracted user ID from the token
       } catch (error) {
@@ -26,9 +25,7 @@ const SideMenu = () => {
 
   // Fetch user data once we have the userId
   const { user, loading, error } = useUser(extractedUserId);
-  console.log("User Data:", user); // Log user data
-  console.log("Loading Status:", loading); // Log loading status
-  console.log("Error:", error); // Log error if any
+  
 
   if (loading) return <div className="p-4 text-blue-500">Loading...</div>;
   if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
@@ -38,18 +35,18 @@ const SideMenu = () => {
       <div className="text-center mb-4">
         <div className="border-4 border-red-500 rounded-full p-2 mx-auto w-44 h-44 bg-white">
           <img
-            src={user?.data?.profilePic || "https://via.placeholder.com/150"}
+            src={user?.profilePic || "https://via.placeholder.com/150"}
             alt={user?.name || "User Avatar"}
             className="w-full h-full rounded-full object-cover"
           />
         </div>
-        <p className="text-xl font-bold mt-4">{user?.data?.fullName || "User Name"}</p>
+        <p className="text-xl font-bold mt-4">{user?.fullName || "User Name"}</p>
       </div>
       <div className="py-4">
         <p className="flex justify-between text-xl px-6">
           Gender:{" "}
           <span className="font-semibold">
-            {user?.data?.gender || "Not Available"}
+            {user?.gender || "Not Available"}
           </span>
         </p>
       </div>
