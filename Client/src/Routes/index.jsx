@@ -9,7 +9,7 @@ import ViewFriends from "../Components/ViewFriends";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/home",
     element: <App />,
     children: [
       // Protect the /home and /friendList routes
