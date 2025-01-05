@@ -7,14 +7,16 @@ const useUser = (userId) => {
 
   useEffect(() => {
     // Get the token from localStorage or sessionStorage
-    const token = localStorage.getItem("token"); // Or use sessionStorage if that's where you store it
-
+    const token = localStorage.getItem("token");
+    console.log("Stored Token:", token); // Log token value
 
     // Define the fetchUser function
     const fetchUser = async () => {
       setLoading(true);
       setError(null);
       try {
+        console.log("Fetching user with ID:", userId); // Log user ID being fetched
+
         const response = await fetch(`/api/user/singleUser/${userId}`, {
           method: "GET",
           headers: {
@@ -23,16 +25,22 @@ const useUser = (userId) => {
           },
         });
 
+        console.log("Response status:", response.status); // Log response status
+        
+        // Check if the response is ok before consuming the body
         if (!response.ok) {
           throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
 
+        // Only parse the JSON if the response is successful
         const data = await response.json();
-        setUser(data);
-       
+        console.log("Fetched user data:", data); // Log the fetched user data
+        
+        setUser(data.data); // Set the fetched user data
         
       } catch (err) {
         setError(err.message);
+        console.error("Error fetching user:", err); // Log error if fetching fails
       } finally {
         setLoading(false);
       }
@@ -44,6 +52,7 @@ const useUser = (userId) => {
     } else {
       setError("No user ID or token provided.");
       setLoading(false);
+      console.error("No user ID or token provided."); // Log when no user ID or token is found
     }
   }, [userId]);
 

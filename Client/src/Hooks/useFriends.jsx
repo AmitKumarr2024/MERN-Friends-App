@@ -10,7 +10,7 @@ const useFriends = () => {
       try {
         const response = await fetch("/api/user/allUser");
         const data = await response.json();
-        setFriends(data.data);
+        setFriends(data?.data);
        
         
       } catch (err) {

@@ -139,40 +139,48 @@ export const login = async (req,res)=>{
       }
 }
 
-export const singleUser = async(req,res)=>{
-    try {
-        // Check if userId is present in the request
-        if (!req.params.id) {
-          return res.status(400).json({
-            message: "User ID is missing",
-            error: true,
-          });
-        }
-    
-        // Fetch user details from the database
-        const user = await UserModel.findById(req.params.id).select("-password");
-    
-        // Check if user exists
-        if (!user) {
-          console.error("User not found for ID:", req.userId);
-          return res.status(404).json({
-            message: "User not found",
-            error: true,
-          });
-        }
-    
-        // Send user details in response
-        res.status(200).json({
-          data: user,
-          message: "User details retrieved successfully",
-          success: true,
-        });
-      } catch (error) {
-        console.error("Error in singleUser controller", error.message);
-        return res.status(500).json({ error: "Internal Server Error" });
-      }
+export const singleUser = async (req, res) => {
+  try {
+    // Log the incoming user ID from the request
+    console.log("Request received for user ID:", req.params.id);
 
-}
+    // Check if userId is present in the request
+    if (!req.params.id) {
+      console.error("User ID is missing in the request");
+      return res.status(400).json({
+        message: "User ID is missing",
+        error: true,
+      });
+    }
+
+    // Fetch user details from the database
+    const user = await UserModel.findById(req.params.id).select("-password");
+
+    // Log the result of the database query
+    console.log("User fetched from DB:", user);
+
+    // Check if user exists
+    if (!user) {
+      console.error("User not found for ID:", req.params.id);
+      return res.status(404).json({
+        message: "User not found",
+        error: true,
+      });
+    }
+
+    // Send user details in response
+    console.log("Sending user details:", user);
+    res.status(200).json({
+      data: user,
+      message: "User details retrieved successfully",
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error in singleUser controller:", error.message);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 
 
 export const allUser = async( req,res)=>{

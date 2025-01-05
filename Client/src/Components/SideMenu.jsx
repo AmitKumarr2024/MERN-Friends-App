@@ -8,10 +8,12 @@ const SideMenu = () => {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
+    console.log("Stored Token:", storedToken); // Log token value
     
     if (storedToken) {
       try {
         const decoded = jwtDecode(storedToken);
+        console.log("Decoded Token:", decoded); // Log decoded token
         
         setExtractedUserId(decoded?._id); // Set extracted user ID from the token
       } catch (error) {
@@ -24,6 +26,9 @@ const SideMenu = () => {
 
   // Fetch user data once we have the userId
   const { user, loading, error } = useUser(extractedUserId);
+  console.log("User Data:", user); // Log user data
+  console.log("Loading Status:", loading); // Log loading status
+  console.log("Error:", error); // Log error if any
 
   if (loading) return <div className="p-4 text-blue-500">Loading...</div>;
   if (error) return <div className="p-4 text-red-600">Error: {error}</div>;
@@ -50,7 +55,6 @@ const SideMenu = () => {
       </div>
       
       <div className="flex flex-col gap-4">
-       
         <Link
           to="/newRequest"
           className="w-full text-center hover:bg-slate-100 bg-white p-3 text-xl text-slate-500 font-semibold rounded-md shadow-md transition duration-300 ease-in-out"
@@ -61,7 +65,7 @@ const SideMenu = () => {
           to="/viewFriends"
           className="w-full text-center hover:bg-slate-100 bg-white p-3 text-xl text-slate-500 font-semibold rounded-md shadow-md transition duration-300 ease-in-out"
         >
-         View Friends
+          View Friends
         </Link>
       </div>
     </div>

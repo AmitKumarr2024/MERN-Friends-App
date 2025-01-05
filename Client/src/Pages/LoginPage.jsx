@@ -13,8 +13,8 @@ const Login = () => {
   // Check if user is already logged in when the component mounts
   useEffect(() => {
     const token = localStorage.getItem("token");  // Get token from localStorage
+    debugger; // Add debugger here to inspect token and flow
     
-
     if (token) {
       navigate("/home");  // Navigate to home page if token exists
     }
@@ -25,8 +25,12 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    debugger; // Add debugger here to inspect form data before submission
+    
     try {
       const data = { email, password };
+      console.log(data); // Log form data for debugging
+
       const response = await fetch("/api/user/loginUser", {
         method: "POST",
         headers: {
@@ -34,14 +38,20 @@ const Login = () => {
         },
         body: JSON.stringify(data),
       });
+
+      // Debugging the response before parsing
+      debugger; // Add debugger to inspect the response object
+
       const result = await response.json();
+
+      // Debugging the result
+      debugger; // Add debugger to inspect the result
 
       if (result.success) {
         toast.success(result.message || "Login Successful");
 
         // Store the token in localStorage
         localStorage.setItem("token", result.data);  // Assuming result.token contains the JWT
-        
 
         navigate('/home');  // Navigate to home page after login
       } else {
