@@ -11,7 +11,7 @@ const useUnfriend = () => {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:8005/api/friends/unfriend", {
+      const response = await fetch("/api/friends/unfriend", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

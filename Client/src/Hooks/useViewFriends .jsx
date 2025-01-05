@@ -9,7 +9,7 @@ const useViewFriends = (userId) => {
     if (userId) {
       const fetchFriends = async () => {
         try {
-          const response = await fetch("http://localhost:8005/api/friends/viewFriend", {
+          const response = await fetch("/api/friends/viewFriend", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

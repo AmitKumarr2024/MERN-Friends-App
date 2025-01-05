@@ -13,7 +13,7 @@ const useMutualFriends = (userId, friendId) => {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:8005/api/friends/mutualFriend?userId=${userId}&friendId=${friendId}`
+          `/api/friends/mutualFriend?userId=${userId}&friendId=${friendId}`
         );
 
         const data = await response.json();

@@ -11,7 +11,7 @@ const useCancelFriendRequest = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:8005/api/friends/cancelRequest", {
+      const response = await fetch("/api/friends/cancelRequest", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

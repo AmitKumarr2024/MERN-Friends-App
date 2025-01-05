@@ -11,7 +11,7 @@ const useAcceptFriendRequest = () => {
     setSuccess(null);
 
     try {
-      const response = await fetch("http://localhost:8005/api/friends/acceptFriend", {
+      const response = await fetch("/api/friends/acceptFriend", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
