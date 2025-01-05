@@ -118,7 +118,7 @@ export const login = async (req,res)=>{
         });
     
         // Determine if the environment is production
-        const isProduction = process.env.NODE_ENV === "production";
+        const isProduction = process.env.NODE_ENV !== "development";
     
         const tokenOptions = {
           httpOnly: true,
