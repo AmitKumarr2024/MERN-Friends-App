@@ -1,9 +1,14 @@
+import { Outlet } from "react-router";
 import "./App.css";
+import Navbar from "./Components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
-      <h1 className="poppins-regular">Hello Amit</h1>
+      <Toaster position="top-right" />
+      <Navbar />
+      <Outlet />
     </>
   );
 }
