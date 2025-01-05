@@ -1,4 +1,4 @@
-
+import path from 'path';
 dotenv.config();
 import express from "express";
 import dotenv from "dotenv";
@@ -15,16 +15,22 @@ const port = process.env.PORT || 8006;
 app.use(express.json());
 app.use(cookieParser());
 
+const __dirname = path.resolve();
+
 
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "DELETE","PATCH"],
     credentials: true, // Allow credentials to be sent
   })
 );
 
+app.use(express.static(path.join(__dirname, "Client/dist")));
 
+app.get("*",(req,res)=>{
+  res.sendFile(path.join(__dirname,"Client","dist","index.html"))
+})
 
 app.use("/api/user/", UserRegister);
 app.use("/api/friends/", FriendRequest);
