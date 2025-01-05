@@ -1,11 +1,12 @@
-import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  // Only check localStorage for the token
-  const token = localStorage.getItem("token");
+// Assuming you are using a function to check user authentication status
+const isAuthenticated = () => {
+  return !!localStorage.getItem('token');  // Example check, you can use context or Redux state instead
+};
 
-  if (!token) {
+const ProtectedRoute = ({ children }) => {
+  if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
   }
 

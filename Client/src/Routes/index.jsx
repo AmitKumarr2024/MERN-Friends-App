@@ -29,12 +29,11 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      
       {
         path: "/newRequest",
         element: (
           <ProtectedRoute>
-            <NewRequestRecieve/>
+            <NewRequestRecieve />
           </ProtectedRoute>
         ),
       },
@@ -42,7 +41,7 @@ const router = createBrowserRouter([
         path: "/viewFriends",
         element: (
           <ProtectedRoute>
-            <ViewFriends/>
+            <ViewFriends />
           </ProtectedRoute>
         ),
       },
